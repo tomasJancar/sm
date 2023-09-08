@@ -34,24 +34,33 @@ class SortedLinkedList implements NodeList
     public function insertNode(Node $node): void
     {
         $this->dataTypeValidator->validate($this->comparator, $node->getData());
+        $this->count++;
 
         if ($this->head === null || $this->comparator->compare($node, $this->head) < 0) {
             $node->setNext($this->head);
             $this->head = $node;
-        } else {
-            $current = $this->head;
-            while ($current->getNext() !== null && $this->comparator->compare($node, $current->getNext()) > 0) {
-                $current = $current->getNext();
-            }
-            $node->setNext($current->getNext());
-            $current->setNext($node);
+
+            return;
         }
 
-        $this->count++;
+        $this->insertAfterNode($node);
+    }
+
+    private function insertAfterNode(Node $node): void
+    {
+        $insertionPoint = $this->head;
+        assert($insertionPoint !== null);
+
+        while ($insertionPoint->getNext() !== null && $this->comparator->compare($node, $insertionPoint->getNext()) > 0) {
+            $insertionPoint = $insertionPoint->getNext();
+        }
+
+        $node->setNext($insertionPoint->getNext());
+        $insertionPoint->setNext($node);
     }
 
     /**
-     * @return array<int|string|null>
+     * @return array<int|string>
      */
     public function toArray(): array
     {
