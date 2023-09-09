@@ -13,7 +13,7 @@ final class SortedLinkedListFactory
 {
     public static function createIntList(OrderType $orderType = OrderType::ASC): SortedLinkedList
     {
-        return self::create(NodeType::INT, $orderType);
+        return self::create(NodeType::INTEGER, $orderType);
     }
 
     public static function createStringList(OrderType $orderType = OrderType::ASC): SortedLinkedList
@@ -28,7 +28,7 @@ final class SortedLinkedListFactory
                 new StringComparator($orderType),
                 new IntStringDataTypeValidator()
             ),
-            NodeType::INT => new SortedLinkedList(
+            NodeType::INTEGER => new SortedLinkedList(
                 new IntComparator($orderType),
                 new IntStringDataTypeValidator()
             ),

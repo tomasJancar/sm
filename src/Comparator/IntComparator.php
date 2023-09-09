@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TomasJancar\ShipMonk\Comparator;
 
+use TomasJancar\ShipMonk\Node\IntNode;
 use TomasJancar\ShipMonk\Node\Node;
 
 class IntComparator implements Comparator
@@ -15,16 +16,19 @@ class IntComparator implements Comparator
 
     public function compare(Node $a, Node $b): int
     {
-        return ($this->orderType === OrderType::ASC ? 1 : -1) * ($a->getData() <=> $b->getData());
+        assert($a instanceof IntNode);
+        assert($b instanceof IntNode);
+
+        return $this->orderType->value * ($a->getData() <=> $b->getData());
     }
 
-    public function isSupported(int|string $data): bool
+    public function isSupported(Node $node): bool
     {
-        return is_numeric($data);
+        return $node instanceof IntNode;
     }
 
     public function humanReadableSupportedType(): string
     {
-        return 'int';
+        return 'integer';
     }
 }

@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace TomasJancar\ShipMonk;
 
-use PharIo\Manifest\Type;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use TomasJancar\ShipMonk\Comparator\OrderType;
 use TomasJancar\ShipMonk\Exceptions\WrongValueTypeException;
-use TomasJancar\ShipMonk\Node\LinkedNode;
 use TomasJancar\ShipMonk\Node\Node;
 use TomasJancar\ShipMonk\Node\NodeType;
+use TomasJancar\ShipMonk\Node\StringNode;
 
 final class SortedLinkedListTest extends TestCase
 {
@@ -62,7 +61,7 @@ final class SortedLinkedListTest extends TestCase
         $descSortedLinkedList->insertValue('apple');
         $descSortedLinkedList->insertValue('cherry');
         $descSortedLinkedList->insertValue('date');
-        $descSortedLinkedList->insertNode(new LinkedNode('monkey'));
+        $descSortedLinkedList->insertNode(new StringNode('monkey'));
 
         Assert::assertSame(['monkey', 'date', 'cherry', 'banana', 'apple'], $descSortedLinkedList->toArray());
     }
@@ -82,7 +81,7 @@ final class SortedLinkedListTest extends TestCase
      */
     public static function linkedListDataProvider(): iterable
     {
-        $sortedIntLinkedList = SortedLinkedListFactory::create(NodeType::INT);
+        $sortedIntLinkedList = SortedLinkedListFactory::create(NodeType::INTEGER);
         $sortedIntLinkedList->insertValue(5);
         $sortedIntLinkedList->insertValue(2);
 
@@ -120,7 +119,7 @@ final class SortedLinkedListTest extends TestCase
     {
         return [
             [
-                'type' => NodeType::INT,
+                'type' => NodeType::INTEGER,
                 'value' => 'banana',
             ],
             [

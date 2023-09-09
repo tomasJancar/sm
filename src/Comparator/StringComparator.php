@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace TomasJancar\ShipMonk\Comparator;
 
 use TomasJancar\ShipMonk\Node\Node;
+use TomasJancar\ShipMonk\Node\StringNode;
 
 class StringComparator implements Comparator
 {
@@ -15,18 +16,15 @@ class StringComparator implements Comparator
 
     public function compare(Node $a, Node $b): int
     {
-        $dataA = $a->getData();
-        assert(is_string($dataA), 'Node A is not string type.');
+        assert($a instanceof StringNode, 'Node A is not string type.');
+        assert($b instanceof StringNode, 'Node B is not string type.');
 
-        $dataB = $b->getData();
-        assert(is_string($dataB), 'Node B is not string type.');
-
-        return ($this->orderType === OrderType::ASC ? 1 : -1) * strcmp($dataA, $dataB);
+        return $this->orderType->value * strcmp($a->getData(), $b->getData());
     }
 
-    public function isSupported(int|string $data): bool
+    public function isSupported(Node $node): bool
     {
-        return is_string($data);
+        return $node instanceof StringNode;
     }
 
     public function humanReadableSupportedType(): string

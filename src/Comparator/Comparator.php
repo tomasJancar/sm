@@ -10,7 +10,7 @@ interface Comparator
 {
     public function compare(Node $a, Node $b): int;
 
-    public function isSupported(int|string $data): bool;
+    public function isSupported(Node $node): bool;
 
     public function humanReadableSupportedType(): string;
 }

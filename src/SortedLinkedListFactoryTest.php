@@ -26,7 +26,7 @@ final class SortedLinkedListFactoryTest extends TestCase
         $sortedLinkedList->insertValue(5);
 
         $this->expectException(WrongValueTypeException::class);
-        $this->expectExceptionMessage('This type(string) is not accepted. Please use int value.');
+        $this->expectExceptionMessage('This type(string) is not accepted. Please use integer value.');
         $sortedLinkedList->insertValue('foo');
     }
 }

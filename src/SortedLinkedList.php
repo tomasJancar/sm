@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace TomasJancar\ShipMonk;
 
 use TomasJancar\ShipMonk\Comparator\Comparator;
-use TomasJancar\ShipMonk\Node\LinkedNode;
+use TomasJancar\ShipMonk\Node\IntNode;
 use TomasJancar\ShipMonk\Node\Node;
+use TomasJancar\ShipMonk\Node\StringNode;
 
 /**
  * @implements NodeList<int|string>
@@ -27,13 +28,15 @@ class SortedLinkedList implements NodeList
 
     public function insertValue(int|string $data): void
     {
-        $node = new LinkedNode($data);
-        $this->insertNode($node);
+        match (gettype($data)) {
+            'integer' => $this->insertNode(new IntNode($data)),
+            'string' => $this->insertNode(new StringNode($data)),
+        };
     }
 
     public function insertNode(Node $node): void
     {
-        $this->dataTypeValidator->validate($this->comparator, $node->getData());
+        $this->dataTypeValidator->validate($this->comparator, $node);
         $this->count++;
 
         if ($this->head === null || $this->comparator->compare($node, $this->head) < 0) {
@@ -51,7 +54,10 @@ class SortedLinkedList implements NodeList
         $insertionPoint = $this->head;
         assert($insertionPoint !== null);
 
-        while ($insertionPoint->getNext() !== null && $this->comparator->compare($node, $insertionPoint->getNext()) > 0) {
+        while ($insertionPoint->getNext() !== null && $this->comparator->compare(
+            $node,
+            $insertionPoint->getNext()
+        ) > 0) {
             $insertionPoint = $insertionPoint->getNext();
         }
 
@@ -98,6 +104,9 @@ class SortedLinkedList implements NodeList
         return $this->current !== null;
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function count(): int
     {
         return $this->count;

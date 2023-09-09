@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace TomasJancar\ShipMonk\Comparator;
 
-enum OrderType: string
+enum OrderType: int
 {
-    case ASC = 'asc';
-    case DESC = 'desc';
+    case ASC = 1;
+    case DESC = -1;
 }
