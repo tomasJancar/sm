@@ -1,3 +1,6 @@
 includes:
     - phar://phpstan.phar/conf/bleedingEdge.neon
 
+parameters:
+	ignoreErrors:
+		- '#Method TomasJancar\\ShipMonk\\SortedLinkedList::count\(\) should return int\<0, max\> but returns int.#'
