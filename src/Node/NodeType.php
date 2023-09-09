@@ -7,5 +7,5 @@ namespace TomasJancar\ShipMonk\Node;
 enum NodeType: string
 {
     case STRING = 'string';
-    case INT = 'int';
+    case INTEGER = 'integer';
 }

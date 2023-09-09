@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace TomasJancar\ShipMonk\Node;
 
-final class LinkedNode implements Node
+final class IntNode implements Node
 {
-    private ?Node $next = null;
-
     public function __construct(
-        private readonly int|string $data
+        private readonly int $data,
+        private ?Node $next = null
     ) {
     }
 
-    public function getData(): int|string
+    public function getData(): int
     {
         return $this->data;
     }
