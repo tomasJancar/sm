@@ -1,0 +1,30 @@
+{
+    "name": "tomasjancar/ship-monk",
+    "description": "Quest for ShipMonk",
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "TomasJancar\\ShipMonk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tomas Jancar",
+            "email": "tomas@jancar.cz"
+        }
+    ],
+    "require": {
+        "php": ">=8.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.3",
+        "phpstan/phpstan": "^1.10",
+        "symplify/easy-coding-standard": "^12.0"
+    },
+    "scripts": {
+        "phpunit": "phpunit src/",
+        "phpstan": "phpstan analyse src --level 8 --memory-limit 1G",
+        "fix-cs": "ecs check src --fix",
+        "check-cs": "ecs check src"
+    }
+}
