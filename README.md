@@ -28,4 +28,16 @@ $sortedLinkedList->insertValue('Zoe');
 $sortedLinkedList->insertValue('Bob');
 
 // Getting number of elements
-echo $sortedLinkedList->getCount(); // Outputs: 4
+echo count($sortedLinkedList); // Outputs: 4
+
+// Iterating over the list
+foreach ($sortedLinkedList as $node) {
+    echo '//' . $node . PHP_EOL;
+}
+
+// Outputs:
+// Anna
+// Bob
+// Mike
+// Zoe
+```
